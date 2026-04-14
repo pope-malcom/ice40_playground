@@ -1,2 +1,5 @@
 # Don't add direnv folder
 .direnv/
+
+# Ignore the build folder
+build/
