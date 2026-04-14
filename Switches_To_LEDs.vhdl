@@ -15,6 +15,6 @@ entity Switches_To_LEDs is
 end entity Switches_To_LEDs;
 architecture RTL of Switches_To_LEDs is
 begin
-  o_LED_3 <= i_Rst;
-  o_LED_4 <= not i_RST;
+  o_LED_1 <= i_Rst;
+  o_LED_0 <= not i_RST;
 end RTL;
