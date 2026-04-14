@@ -1,7 +1,7 @@
 # First ever makefile for VHDL building.
 # Check makefiletutorial.com for a refresher 
 
-# .DELETE_ON_ERROR:
+.DELETE_ON_ERROR:
 
 TOP := Switches_To_LEDs
 
