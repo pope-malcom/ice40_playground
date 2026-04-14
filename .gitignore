@@ -1,0 +1,2 @@
+# Don't add direnv folder
+.direnv/

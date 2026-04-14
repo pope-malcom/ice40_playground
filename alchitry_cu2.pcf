@@ -1,0 +1,12 @@
+set_io i_Clk    P7
+
+set_io o_LED_0  J11
+set_io o_LED_1  K11
+set_io o_LED_2  G12
+set_io o_LED_3  H12
+set_io o_LED_4  K14
+set_io o_LED_5  J12
+set_io o_LED_6  L14
+set_io o_LED_7  K12
+
+set_io i_RST    P8
