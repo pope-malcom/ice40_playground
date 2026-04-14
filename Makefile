@@ -1,7 +1,8 @@
-# First ever makefile for VHDL building.
-# Check makefiletutorial.com for a refresher 
-
-.DELETE_ON_ERROR:
+# Makefile for build vhdl projects with yosys, nextpnr and icestorm
+# Top module must be placed at root level, called <module_name.vhdl>
+#
+# Options
+# 	TOP=<module_name> builds with new top module.
 
 TOP := Switches_To_LEDs
 
@@ -32,3 +33,5 @@ clean:
 	rm -f *.json
 	rm -f *.asc
 	rm -f *.bin
+
+.DELETE_ON_ERROR:
