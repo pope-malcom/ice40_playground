@@ -13,7 +13,7 @@ SRCS := ${wildcard src/*.vhdl}
 # Location for build files
 OUT := ${BUILD_DIR}/${TOP}
 
-default: ${OUT}.bin
+all: ${OUT}.bin
 	
 ${OUT}.bin: ${OUT}.asc
 	icepack $^ $@
