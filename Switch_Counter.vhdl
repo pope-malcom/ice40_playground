@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 entity Switch_Counter is
   port (
+    i_Clk       : in  std_logic;
     i_RST       : in  std_logic;
     o_LED_0     : out std_logic;
     o_LED_1     : out std_logic;
@@ -12,19 +13,35 @@ entity Switch_Counter is
     o_LED_4     : out std_logic;
     o_LED_5     : out std_logic;
     o_LED_6     : out std_logic;
-    o_LED_7     : out std_logic);
+    o_LED_7     : out std_logic
+  );
 end entity Switch_Counter;
 architecture RTL of Switch_Counter is
 
-  signal r_count : integer := 0;
-  signal r_out   : std_logic_vector(7 downto 0);
+  signal r_count            : integer := 0;
+  signal r_out              : std_logic_vector(7 downto 0);
+  signal w_Debounced_Switch : std_logic;
+
+  signal r_Debounced_Switch            : std_logic := '0';
 begin
-  process (i_RST) is
+  Debounce_Inst : entity work.Debounce_Filter
+    generic map(
+      DEBOUNCE_LIMIT => 250000)
+    port map (
+      i_Clk       => i_Clk,
+      i_Bouncy    => i_RST,
+      o_Debounced => w_Debounced_Switch
+    );
+
+  process (i_Clk) is
   begin
-    if rising_edge(i_RST) then
-      r_count <= r_count + 1;
-      -- Assigns count+1 because count updates at the same time the conversion occurs. Can be fixed by clocking the signal
-      r_out <= std_logic_vector(to_unsigned(r_count+1, r_out'length));
+    if rising_edge(i_Clk) then
+      r_Debounced_Switch <= w_Debounced_Switch;
+      if (w_Debounced_Switch = '0' and r_Debounced_Switch = '1') then
+        r_count <= r_count + 1;
+      end if;
+
+      r_out <= std_logic_vector(to_unsigned(r_count, r_out'length));
     end if;
   end process;
 
