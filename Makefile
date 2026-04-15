@@ -32,8 +32,5 @@ prog: ${OUT}.bin
 .PHONY: clean
 clean:
 	rm -r build/
-	rm -f *.json
-	rm -f *.asc
-	rm -f *.bin
 
 .DELETE_ON_ERROR:
