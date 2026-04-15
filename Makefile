@@ -8,6 +8,8 @@ TOP := Switches_To_LEDs
 
 BUILD_DIR := ./build
 
+SRCS := ${wildcard src/*.vhdl}
+
 # Location for build files
 OUT := ${BUILD_DIR}/${TOP}
 
@@ -21,7 +23,7 @@ ${OUT}.asc: ${OUT}.json
 
 ${OUT}.json: ${TOP}.vhdl
 	mkdir -p ${dir $@}
-	yosys -m ghdl -p 'ghdl $^ -e ${basename $^}; synth_ice40 -json $@'
+	yosys -m ghdl -p 'ghdl $^ ${SRCS} -e ${basename $^}; synth_ice40 -json $@'
 
 .PHONY: prog
 prog: ${OUT}.bin
